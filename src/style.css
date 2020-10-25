@@ -1,11 +1,42 @@
-:root {
-    --red: #c9191a;
-    --yellow: #fadd13;
-    --light-green: #b9d041;
-    --dark-green: #1e9046;
-    --teal: #23a5a1;
-    --blue: #246bb3;
-    --purple: #a57ab4;
-    --pink: #d562a1;
+.barcode {
+    display: inline-flex;
+    flex-wrap: wrap;
+    border: 1px solid black;
+    border-radius: .5rem;
+    overflow: hidden;
+    position: relative;
+    margin: .5rem;
 }
 
+.barcode--small {
+    width: 2.1cm;
+    max-height: 2cm;
+}
+
+.barcode--medium {
+    width: 5cm;
+    max-height: 5cm;
+}
+
+.barcode--large {
+    width: 10.5cm;
+    max-height: 20cm;
+}
+
+.barcode__title {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    width: auto;
+    border: 1px solid black;
+    border-radius: .5rem;
+    font-family: Futura;
+    font-size: .5rem;
+    background-color: white;
+    padding: .2rem .3rem;
+    margin: 0 -.3rem -.3rem 0;
+}
+
+.barcode__pattern {
+    width: 2.1mm;
+}

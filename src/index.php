@@ -1,8 +1,6 @@
 <?php
-$codes = [];
-
-$codes['start'] = []
-
+require 'bootstrap.php';
+$codes = require 'codes.php';
 ?>
 <!doctype html>
 <html>
@@ -14,14 +12,7 @@ $codes['start'] = []
     <link rel="stylesheet" type="text/css" href="style.css">
 </head>
 <body>
-    <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
-        <line x1="0" y1="80" x2="100" y2="20" stroke="black" />
-    </svg>
-    <article class="barcode">
-        <span class="barcode__line"></span>
-        <span class="barcode__line"></span>
-        <span class="barcode__line"></span>
-        <span class="barcode__line"></span>
-        <span class="barcode__line"></span>
-    </article>
+    <?php foreach($codes as $index => $code): ?>
+        <?php template('repeat-barcode', ['code' => $index, 'size' => 'small']); ?>
+    <?php endforeach; ?>
 </body>
