@@ -8,7 +8,7 @@ header('Content-Type: image/svg+xml');
 header('Vary: Accept-Encoding');
 $code = $codes[$_GET['code']];
 
-// meant to be defined as 2 cm width...
+// meant to be defined as 2.1 mm width in order to get the right size.
 // color should be .2mm, space .2mm
 // 5 colors repeating...
 // color space color space color space color space color space
