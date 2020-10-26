@@ -6,6 +6,9 @@ $blindBags = [
     'c' => ['dark-green', 'red', 'pink', 'purple', 'yellow'],
 ];
 
+/**
+ * Named codes - index is the slug.  Values are `pattern` and `title`.
+ */
 return [
     // starter pack
     'start' => [

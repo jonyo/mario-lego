@@ -1,12 +1,18 @@
 <?php
-$codes = require 'codes.php';
 
-if (!isset($codes[$_GET['code']])) {
-    throw new Exception('Invalid code');
+use Jonyo\MarioLego\Model\Barcode;
+
+require '../bootstrap.php';
+
+$barcode = new Barcode();
+$id = (int)$_GET['id'] ?? 0;
+if ($id < 1) {
+    throw new Exception('Invalid id');
 }
+$pattern = $barcode->patternFromId($id);
+
 header('Content-Type: image/svg+xml');
 header('Vary: Accept-Encoding');
-$code = $codes[$_GET['code']];
 
 // meant to be defined as 2.1 mm width in order to get the right size.
 // color should be .2mm, space .2mm
@@ -27,7 +33,7 @@ $code = $codes[$_GET['code']];
         }
     </style>
     <g stroke-width="2">
-        <?php foreach ($code['pattern'] as $lineNum => $color): ?>
+        <?php foreach ($pattern as $lineNum => $color): ?>
             <?php $x = ($lineNum * 4) ?>
             <line x1="<?= $x ?>" y1="0" x2="<?= $x ?>" y2="100%" stroke="var(--<?= $color ?>)" />
         <?php endforeach; ?>
