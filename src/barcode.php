@@ -1,13 +1,11 @@
 <?php
-
-header('Content-Type: image/svg+xml');
-header('Vary: Accept-Encoding');
-
 $codes = require 'codes.php';
 
 if (!isset($codes[$_GET['code']])) {
-    return;
+    throw new Exception('Invalid code');
 }
+header('Content-Type: image/svg+xml');
+header('Vary: Accept-Encoding');
 $code = $codes[$_GET['code']];
 
 // meant to be defined as 2 cm width...
