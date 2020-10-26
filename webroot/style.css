@@ -3,24 +3,23 @@
     flex-wrap: wrap;
     border: 1px solid black;
     border-radius: .5rem;
-    overflow: hidden;
     position: relative;
     margin: .5rem;
 }
 
 .barcode--small {
-    width: 2.1cm;
-    max-height: 2cm;
+    width: 2cm;
 }
 
 .barcode--medium {
-    width: 5cm;
-    max-height: 5cm;
+    width: 6.05cm;
 }
 
 .barcode--large {
-    width: 10.5cm;
-    max-height: 20cm;
+    width: 18.1cm;
+    display: flex;
+    margin: .5rem auto;
+    page-break-after: always;
 }
 
 .barcode__title {
@@ -38,5 +37,5 @@
 }
 
 .barcode__pattern {
-    width: 2.1mm;
+    width: 20.1mm;
 }

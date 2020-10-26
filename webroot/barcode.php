@@ -14,12 +14,24 @@ $pattern = $barcode->patternFromId($id);
 header('Content-Type: image/svg+xml');
 header('Vary: Accept-Encoding');
 
-// meant to be defined as 2.1 mm width in order to get the right size.
-// color should be .2mm, space .2mm
-// 5 colors repeating...
-// color space color space color space color space color space
+/**
+ * Notes:
+ * 
+ * Styling:  20.1mm width for correct barcode size
+ * 
+ * Uses pattern:
+ * | color | space | color | space | color | space | color | space | color | space |
+ * 
+ * Where each color is .2mm wide and each space is .2mm wide.
+ * 
+ * Barcodes are 5 colors that repeat.  This SVG repeats the pattern 10 times, making a 20x20cm square.
+ * 
+ * Viewbox starts at -1 to avoid issues when the image is repeated, and is why it needs 20.1mm width to account for
+ * stroke width.
+ */
+
 ?>
-<svg viewBox="-1 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<svg viewBox="-1 0 200 200" xmlns="http://www.w3.org/2000/svg">
     <style>
         :root {
             --red: #b22222;/* #c9191a; */
@@ -32,10 +44,15 @@ header('Vary: Accept-Encoding');
             --pink: #da70d6; /* #d562a1; */
         }
     </style>
-    <g stroke-width="2">
-        <?php foreach ($pattern as $lineNum => $color): ?>
-            <?php $x = ($lineNum * 4) ?>
-            <line x1="<?= $x ?>" y1="0" x2="<?= $x ?>" y2="100%" stroke="var(--<?= $color ?>)" />
-        <?php endforeach; ?>
-    </g>
+    <defs>
+        <g stroke-width="2" id="pattern">
+            <?php foreach ($pattern as $lineNum => $color): ?>
+                <?php $x = ($lineNum * 4) ?>
+                <line x1="<?= $x ?>" y1="0" x2="<?= $x ?>" y2="100%" stroke="var(--<?= $color ?>)" />
+            <?php endforeach; ?>
+        </g>
+    </defs>
+    <?php for ($i = 0; $i < 10; $i++): ?>
+        <use href="#pattern" x="<?= $i * 20 ?>"/>
+    <?php endfor; ?>
 </svg>

@@ -6,9 +6,13 @@ $id = $id ?? 0;
 $size = $size ?? 'small';
 
 $sizes = [
-    'small' => 100,
-    'medium' => 600,
-    'large' => 5000
+    // small = 1x1 images
+    'small' => 1,
+    // medium = 3x3 images
+    'medium' => 9,
+    // large = 9x12 images 
+    // (fill up entire letter-sized printed page, accounting for print margins)
+    'large' => 108
 ];
 $id = (int)$id;
 if ($id < 1) {
