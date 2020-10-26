@@ -9,14 +9,17 @@
 
 .barcode--small {
     width: 2cm;
+    min-height: 2cm;
 }
 
 .barcode--medium {
     width: 6.05cm;
+    min-height: 6cm;
 }
 
 .barcode--large {
     width: 18.1cm;
+    min-height: 22cm;
     display: flex;
     margin: .5rem auto;
     page-break-after: always;
