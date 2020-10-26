@@ -8,3 +8,5 @@ services:
     # we mount the working dir into the container, handy for development
     volumes:
       - ./src:/var/www/html/
+    environment:
+      XDEBUG_CONFIG: "remote_host=host.docker.internal remote_port=9000 remote_enable=1 remote_autostart=1"
