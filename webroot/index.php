@@ -29,7 +29,7 @@ $named = $barcode->allNamed();
                 Type:
                 <select name="type" generator-type>
                     <option value="named">Choose Item(s)</option>
-                    <option value="all-named">All Known Items</option>
+                    <option value="all-named">All Working</option>
                     <option value="id">Enter ID(s)</option>
                     <option value="id-range">Enter ID Range</option>
                 </select>
@@ -46,7 +46,7 @@ $named = $barcode->allNamed();
             <fieldset generator-type-section data-type="named" class="type-section hide">
                 <legend>Choose Item(s)</legend>
                 <label>
-                    <input type="checkbox" name="showId" value="1"> Show ID in barcode titles
+                    <input type="checkbox" name="showId" value="1"> Show ID in barcode labels
                 </label>
                 <br>
                 <ul class="named-selection">
@@ -65,6 +65,12 @@ $named = $barcode->allNamed();
                         </li>
                     <?php endforeach; ?>
                 </ul>
+            </fieldset>
+            <fieldset generator-type-section data-type="all-named" class="type-section hide">
+                <legend>All Working</legend>
+                <label>
+                    <input type="checkbox" name="showId" value="1"> Show ID in barcode labels
+                </label>
             </fieldset>
             <fieldset generator-type-section data-type="id" class="type-section hide">
                 <legend>Enter ID(s)</legend>
