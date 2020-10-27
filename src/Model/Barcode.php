@@ -6,7 +6,12 @@ use Exception;
 
 class Barcode {
     private const MYSTERY_COLOR = 'mystery';
-    
+
+    /**
+     * List of barcode colors indexed by code number multiplier
+     *
+     * @var array
+     */
     private $colorCode = [
         0 => 'blue',
         1 => 'pink',
@@ -18,11 +23,21 @@ class Barcode {
         6 => 'light-green',
     ];
 
+    /**
+     * First colors in every barcode that are common to all barcodes
+     *
+     * @var array
+     */
     private $headerColorPattern = [
         'dark-green',
         'red',
     ];
 
+    /**
+     * List of info for named barcodes set in the config indexed by slug
+     *
+     * @var array
+     */
     private static $namedCodesBySlug = [];
 
     /**
@@ -33,7 +48,7 @@ class Barcode {
     private static $namedCodesById = [];
 
     public function __construct() {
-        if (empty(static::$namedCodesBySlug)) {    
+        if (empty(static::$namedCodesBySlug)) {
             static::$namedCodesBySlug = codes();
             foreach (static::$namedCodesBySlug as $slug => &$details) {
                 $details['id'] = $this->idFromPattern($details['pattern']);
@@ -53,6 +68,8 @@ class Barcode {
 
     /**
      * Generate the full color pattern based on 3 color codes
+     *
+     * @throws Exception
      */
     private function patternFromColorCodes(int $a, int $b, int $c): array
     {
@@ -82,6 +99,8 @@ class Barcode {
 
     /**
      * Figure out the pattern based on the ID
+     *
+     * @throws Exception
      */
     public function patternFromId(int $id): array
     {
@@ -97,8 +116,10 @@ class Barcode {
 
     /**
      * Figure out the ID based on the pattern
+     *
+     * @throws Exception
      */
-    public function idFromPattern(array $pattern): int
+    private function idFromPattern(array $pattern): int
     {
         if (count($pattern) !== 5) {
             throw new Exception('Wrong number of colors in pattern, should be 5 colors.');
@@ -126,8 +147,10 @@ class Barcode {
 
     /**
      * Get the details of a barcode based on ID
-     * 
+     *
      * If the ID does not go to any named codes it will use the ID for title and slug
+     *
+     * @throws Exception
      */
     public function detailsFromId(int $id): array
     {
@@ -138,6 +161,19 @@ class Barcode {
                 'title' => $id,
                 'pattern' => $this->patternFromId($id)
             ];
+    }
+
+    /**
+     * Get details from the slug
+     *
+     * @throws Exception
+     */
+    public function detailsFromSlug(string $slug): array
+    {
+        if (empty(static::$namedCodesBySlug[$slug])) {
+            throw new Exception('Invalid slug ' . $slug);
+        }
+        return static::$namedCodesBySlug[$slug];
     }
 
     /**

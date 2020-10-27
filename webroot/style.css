@@ -1,3 +1,92 @@
+:root {
+    --teal: #26b2aa;
+    --dark-teal: #0b3231;
+    --light-teal: #a8ede9;
+    --transparent-white: rgba(255, 255, 255, .8);
+}
+
+/**
+ * Page Layout
+ */
+body {
+    margin: 0;
+}
+
+.header {
+    background-color: var(--teal);
+    border-radius: 0 0 40% 40%;
+    padding: 1rem;
+    margin-bottom: 2rem;
+}
+
+@media print {
+    .header {
+        display: none;
+    }
+}
+
+.header__title {
+    font-family: Arial, Helvetica, sans-serif;
+    color: var(--dark-teal);
+    margin: 0;
+    text-align: center;
+}
+
+.main {
+    font-family: Arial, Helvetica, sans-serif;
+    max-width: 40rem;
+    margin: 0 auto;
+}
+
+.main__tip {
+    background-color: var(--light-teal);
+    padding: 1rem;
+    border: 1px solid var(--dark-teal);
+    border-radius: .5rem;
+    margin: 0 0 2rem;
+}
+
+.hide {
+    display: none;
+}
+
+/**
+ * Forms
+ */
+.type-section {
+    border-radius: .5rem;
+    margin-top: 1rem;
+}
+
+.named-selection {
+    display: flex;
+    flex-wrap: wrap;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.named-selection__option {
+    width: calc(50% - .2rem);
+}
+
+@media screen and (min-width: 768px) {
+    .named-selection__option {
+        width: calc(33% - .2rem);
+    }
+}
+
+.option-box {
+    display: block;
+    padding: .5rem;
+    border: 1px solid var(--dark-teal);
+    border-radius: .2rem;
+    margin: .1rem;
+}
+
+/**
+ * Barcode
+ */
 .barcode {
     display: inline-flex;
     flex-wrap: wrap;
@@ -27,16 +116,23 @@
 
 .barcode__title {
     position: absolute;
-    bottom: 0;
-    right: 0;
+    bottom: 10%;
+    right: -10%;
     width: auto;
     border: 1px solid black;
     border-radius: .5rem;
     font-family: Futura;
     font-size: .5rem;
-    background-color: white;
+    background-color: var(--transparent-white);
     padding: .2rem .3rem;
     margin: 0 -.3rem -.3rem 0;
+    transform: rotate(-20deg);
+}
+
+.barcode--medium .barcode__title,
+.barcode--large .barcode__title {
+    bottom: 1rem;
+    right: 0;
 }
 
 .barcode__pattern {
