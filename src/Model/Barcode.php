@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types = 1);
 
 namespace Jonyo\MarioLego\Model;
 
@@ -106,9 +106,9 @@ class Barcode {
     {
         // id = a*30 + b*5 + c + 1
         $id--;
-        $a = floor($id/30);
+        $a = (int)floor($id/30);
         $id -= $a * 30;
-        $b = floor($id/5);
+        $b = (int)floor($id/5);
         $id -= $b * 5;
         $c = $id;
         return $this->patternFromColorCodes($a, $b, $c);

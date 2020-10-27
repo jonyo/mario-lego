@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types = 1);
 // requires $details
 if (empty($details['id'])) {
     throw new Exception('Invalid barcode passed');

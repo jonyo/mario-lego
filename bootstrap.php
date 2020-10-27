@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types = 1);
 
 /**
  * Note: this is a very basic app so this just sets up a very basic framework

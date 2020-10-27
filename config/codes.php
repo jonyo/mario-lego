@@ -1,4 +1,5 @@
-<?php
+<?php declare(strict_types = 1);
+
 // blind bag patterns - shared between enemies
 $blindBags = [
     'a' => ['dark-green', 'red', 'blue', 'pink', 'yellow'],
@@ -151,7 +152,7 @@ return [
         'pattern' => ['dark-green', 'red', 'blue', 'yellow', 'pink'],
         'title' => 'television',
     ],
-    /* 
+    /*
         Once this mode activates, scanning these solid colors will provide the following effects.
 
         BLUE: Stomp
