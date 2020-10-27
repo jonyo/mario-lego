@@ -20,6 +20,9 @@ if (!$type || !in_array($type, $validTypes)) {
     throw new Exception('Invalid options');
 }
 
+// Whether or not to show ID for named barcodes
+$showId = !empty($_GET['showId']);
+
 if ($type === 'named') {
     if (empty($_GET['named'])) {
         throw new Exception('No barcodes selected!');
@@ -31,6 +34,7 @@ if ($type === 'named') {
 } else if ($type === 'all-named') {
     $codes = $barcode->allNamed();
 } else if ($type === 'id') {
+    $showId = true;
     if (empty($_GET['id'])) {
         throw new Exception('IDs required');
     }
@@ -40,21 +44,17 @@ if ($type === 'named') {
     $all = array_map('intval', $all);
     $all = array_values(array_filter($all));
     foreach ($all as $id) {
-        if ($id < 1) {
+        if ($id < 1 || $id > 210) {
             continue;
         }
         try {
-            $details = $barcode->detailsFromId($id);
-            if ($details['title'] !== $id) {
-                // include id in title
-                $details['title'] .= ' (' . $id . ')';
-            }
-            $codes[] = $details;
+            $codes[] = $barcode->detailsFromId($id);
         } catch (Exception $e) {
             // noop - it is expected to just skip any invalid.
         }
     }
 } else if ($type === 'id-range') {
+    $showId = true;
     $min = (int)$_GET['min'];
     $max = (int)$_GET['max'];
     if ($min < 1) {
@@ -65,12 +65,7 @@ if ($type === 'named') {
     }
     for ($id = $min; $id <= $max; $id++) {
         try {
-            $details = $barcode->detailsFromId($id);
-            if ($details['title'] !== $id) {
-                // include id in title
-                $details['title'] .= ' (' . $id . ')';
-            }
-            $codes[] = $details;
+            $codes[] = $barcode->detailsFromId($id);
         } catch (Exception $e) {
             // noop - it is expected to get some that use mystery color, we just skip them
         }
@@ -79,6 +74,15 @@ if ($type === 'named') {
 
 if (empty($codes)) {
     throw new Exception('No valid barcodes to show');
+}
+
+if ($showId) {
+    foreach ($codes as &$details) {
+        if ($details['title'] !== $details['id']) {
+            // include id in title
+            $details['title'] .= ' (' . $details['id'] . ')';
+        }
+    }
 }
 
 $size = $_GET['size'] ?? 'small';

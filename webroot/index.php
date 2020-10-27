@@ -45,6 +45,10 @@ $named = $barcode->allNamed();
             <input type="submit" value="Generate">
             <fieldset generator-type-section data-type="named" class="type-section hide">
                 <legend>Choose Item(s)</legend>
+                <label>
+                    <input type="checkbox" name="showId" value="1"> Show ID in barcode titles
+                </label>
+                <br>
                 <ul class="named-selection">
                     <li class="named-selection__option">
                         <label class="option-box">
