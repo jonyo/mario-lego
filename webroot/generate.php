@@ -77,12 +77,7 @@ if (empty($codes)) {
 }
 
 if ($showId) {
-    foreach ($codes as &$details) {
-        if ($details['title'] !== $details['id']) {
-            // include id in title
-            $details['title'] .= ' [' . $details['id'] . ']';
-        }
-    }
+    $codes = $barcode->appendIdsToTitles($codes);
 }
 
 $size = $_GET['size'] ?? 'small';

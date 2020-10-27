@@ -183,4 +183,18 @@ class Barcode {
     {
         return static::$namedCodesBySlug;
     }
+
+    /**
+     * Add the id to all titles that are named in the list of codes
+     */
+    public function appendIdsToTitles(array $codes): array
+    {
+        foreach ($codes as &$details) {
+            if ($details['title'] !== $details['id']) {
+                // include id in title
+                $details['title'] .= ' [' . $details['id'] . ']';
+            }
+        }
+        return $codes;
+    }
 }
