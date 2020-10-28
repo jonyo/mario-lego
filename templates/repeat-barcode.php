@@ -1,7 +1,10 @@
 <?php declare(strict_types = 1);
+
+use Jonyo\MarioLego\Exception\InternalException;
+
 // requires $details
 if (empty($details['id'])) {
-    throw new Exception('Invalid barcode passed');
+    throw new InternalException('Invalid barcode passed');
 }
 $size = $size ?? 'small';
 $sizes = [
@@ -14,7 +17,7 @@ $sizes = [
     'large' => 108
 ];
 if (empty($sizes[$size])) {
-    throw new Exception('Invalid size');
+    throw new InternalException('Invalid size: ' . htmlspecialchars($size) . ' - must be small, medium, or large');
 }
 $repeat = $sizes[$size];
 
