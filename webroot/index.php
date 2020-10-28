@@ -24,7 +24,7 @@ $named = $barcode->allNamed();
             <strong>Tip:</strong> Be sure to print with the highest quality possible for your printer.  These Barcodes
             are quite small and can get blurred together, or sometimes the color "dimmed" if quality is not set to max.
         </p>
-        <form action="generate.php" target="_blank">
+        <form action="generate.php">
             <label>
                 Type:
                 <select name="type" generator-type>

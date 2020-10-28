@@ -37,6 +37,7 @@ body {
     text-decoration: none;
     border: 1px solid var(--dark-teal);
     border-radius: .2rem;
+    padding: .1rem .4rem;
 }
 
 .header__title {
