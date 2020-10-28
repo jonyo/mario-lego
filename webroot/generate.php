@@ -99,7 +99,7 @@ $size = $_GET['size'] ?? 'small';
 </head>
 <body>
     <header class="header">
-        <a href="/" class="header__back">< Back</a>
+        <a href="index.php" class="header__back">< Back</a>
         <h1 class="header__title">Barcodes</h1>
     </header>
     <main class="main" role="main">
