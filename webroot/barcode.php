@@ -1,14 +1,12 @@
 <?php declare(strict_types = 1);
 
+use Jonyo\MarioLego\Exception\InvalidIdException;
 use Jonyo\MarioLego\Model\Barcode;
 
 require '../bootstrap.php';
 
 $barcode = new Barcode();
 $id = (int)$_GET['id'] ?? 0;
-if ($id < 1) {
-    throw new Exception('Invalid id');
-}
 $pattern = $barcode->patternFromId($id);
 
 header('Content-Type: image/svg+xml');

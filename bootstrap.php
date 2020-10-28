@@ -50,3 +50,10 @@ spl_autoload_register(function ($class) {
         require $file;
     }
 });
+
+/**
+ * Handle uncaught exceptions - this is a simple app, we use exceptions for any errors and let this display the error
+ */
+set_exception_handler(function (Throwable $exception) {
+    require BASE_DIR . 'templates/layout/error.php';
+});

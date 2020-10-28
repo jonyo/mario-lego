@@ -2,7 +2,10 @@
 
 namespace Jonyo\MarioLego\Model;
 
-use Exception;
+use Jonyo\MarioLego\Exception\InvalidColorException;
+use Jonyo\MarioLego\Exception\InvalidIdException;
+use Jonyo\MarioLego\Exception\InvalidPatternException;
+use Jonyo\MarioLego\Exception\NotFoundException;
 
 class Barcode {
     private const MYSTERY_COLOR = 'mystery';
@@ -69,7 +72,7 @@ class Barcode {
     /**
      * Generate the full color pattern based on 3 color codes
      *
-     * @throws Exception
+     * @throws \Jonyo\MarioLego\Exception\NotFoundException
      */
     private function patternFromColorCodes(int $a, int $b, int $c): array
     {
@@ -77,21 +80,21 @@ class Barcode {
         $pattern = $this->headerColorPattern;
         if ($colors[$a] === static::MYSTERY_COLOR) {
             // using the "mystery" color - not valid
-            throw new Exception('Using mystery color');
+            throw new NotFoundException('Could not find code - using mystery color');
         }
         $pattern[] = $colors[$a];
         unset($colors[$a]);
         $colors = array_values($colors);
         if ($colors[$b] === static::MYSTERY_COLOR) {
             // using the "mystery" color - not valid
-            throw new Exception('Using mystery color');
+            throw new NotFoundException('Could not find code - using mystery color');
         }
         $pattern[] = $colors[$b];
         unset($colors[$b]);
         $colors = array_values($colors);
         if ($colors[$c] === static::MYSTERY_COLOR) {
             // using the "mystery" color - not valid
-            throw new Exception('Using mystery color');
+            throw new NotFoundException('Could not find code - using mystery color');
         }
         $pattern[] = $colors[$c];
         return $pattern;
@@ -100,10 +103,14 @@ class Barcode {
     /**
      * Figure out the pattern based on the ID
      *
-     * @throws Exception
+     * @throws \Jonyo\MarioLego\Exception\NotFoundException
+     * @throws \Jonyo\MarioLego\Exception\InvalidIdException
      */
     public function patternFromId(int $id): array
     {
+        if ($id < 1 || $id > 210) {
+            throw new InvalidIdException('Invalid item ID: ' . $id);
+        }
         // id = a*30 + b*5 + c + 1
         $id--;
         $a = (int)floor($id/30);
@@ -117,30 +124,31 @@ class Barcode {
     /**
      * Figure out the ID based on the pattern
      *
-     * @throws Exception
+     * @throws \Jonyo\MarioLego\Exception\InvalidPatternException
+     * @throws \Jonyo\MarioLego\Exception\InvalidColorException
      */
     private function idFromPattern(array $pattern): int
     {
         if (count($pattern) !== 5) {
-            throw new Exception('Wrong number of colors in pattern, should be 5 colors.');
+            throw new InvalidPatternException('Wrong number of colors in pattern, should be 5 colors.');
         }
         $pattern = array_values($pattern);
         $colors = $this->colorCode;
         $a = array_search($pattern[2], $colors);
         if ($a === false) {
-            throw new Exception('Invalid color ' . $pattern[2]);
+            throw new InvalidColorException('Invalid color: ' . $pattern[2]);
         }
         unset($colors[$a]);
         $colors = array_values($colors);
         $b = array_search($pattern[3], $colors);
         if ($b === false) {
-            throw new Exception('Invalid/reused color ' . $pattern[3]);
+            throw new InvalidColorException('Invalid or reused color: ' . $pattern[3]);
         }
         unset($colors[$b]);
         $colors = array_values($colors);
         $c = array_search($pattern[4], $colors);
         if ($c === false) {
-            throw new Exception('Invalid/reused color ' . $pattern[4]);
+            throw new InvalidColorException('Invalid or reused color: ' . $pattern[4]);
         }
         return $this->idFromColorCodes($a, $b, $c);
     }
@@ -150,7 +158,8 @@ class Barcode {
      *
      * If the ID does not go to any named codes it will use the ID for title and slug
      *
-     * @throws Exception
+     * @throws \Jonyo\MarioLego\Exception\NotFoundException
+     * @throws \Jonyo\MarioLego\Exception\InvalidIdException
      */
     public function detailsFromId(int $id): array
     {
@@ -166,12 +175,12 @@ class Barcode {
     /**
      * Get details from the slug
      *
-     * @throws Exception
+     * @throws \Jonyo\MarioLego\Exception\NotFoundException
      */
     public function detailsFromSlug(string $slug): array
     {
         if (empty(static::$namedCodesBySlug[$slug])) {
-            throw new Exception('Invalid slug ' . $slug);
+            throw new NotFoundException('Barcode slug not found: ' . $slug);
         }
         return static::$namedCodesBySlug[$slug];
     }

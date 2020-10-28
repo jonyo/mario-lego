@@ -1,5 +1,8 @@
 <?php declare(strict_types = 1);
 
+use Jonyo\MarioLego\Exception\BadRequestException;
+use Jonyo\MarioLego\Exception\InvalidIdException;
+use Jonyo\MarioLego\Exception\NotFoundException;
 use Jonyo\MarioLego\Model\Barcode;
 
 require '../bootstrap.php';
@@ -17,15 +20,16 @@ $validTypes = [
 ];
 
 if (!$type || !in_array($type, $validTypes)) {
-    throw new Exception('Invalid options');
+    throw new BadRequestException('Invalid options');
 }
 
 // Whether or not to show ID for named barcodes
 $showId = !empty($_GET['showId']);
+$lastException = null;
 
 if ($type === 'named') {
     if (empty($_GET['named'])) {
-        throw new Exception('No barcodes selected!');
+        throw new BadRequestException('No barcodes selected!');
     }
     foreach ($_GET['named'] as $slug) {
         $slug = htmlspecialchars($slug);
@@ -36,7 +40,7 @@ if ($type === 'named') {
 } else if ($type === 'id') {
     $showId = true;
     if (empty($_GET['id'])) {
-        throw new Exception('IDs required');
+        throw new BadRequestException('IDs required');
     }
     $all = $_GET['id'];
     $all = preg_replace('/[^0-9]+/', ' ', $all);
@@ -49,8 +53,8 @@ if ($type === 'named') {
         }
         try {
             $codes[] = $barcode->detailsFromId($id);
-        } catch (Exception $e) {
-            // noop - it is expected to just skip any invalid.
+        } catch (NotFoundException|InvalidIdException $e) {
+            $lastException = $e;
         }
     }
 } else if ($type === 'id-range') {
@@ -58,22 +62,25 @@ if ($type === 'named') {
     $min = (int)$_GET['min'];
     $max = (int)$_GET['max'];
     if ($min < 1) {
-        throw new Exception('Invalid min ID');
+        throw new InvalidIdException('Invalid min ID: ' . $min);
     }
     if ($max < $min) {
-        throw new Exception('Max must be more than min');
+        throw new InvalidIdException('Max ' . $max . ' must be more than min ' . $min);
     }
     for ($id = $min; $id <= $max; $id++) {
         try {
             $codes[] = $barcode->detailsFromId($id);
-        } catch (Exception $e) {
-            // noop - it is expected to get some that use mystery color, we just skip them
+        } catch (NotFoundException|InvalidIdException $e) {
+            $lastException = $e;
         }
     }
 }
 
 if (empty($codes)) {
-    throw new Exception('No valid barcodes to show');
+    if ($lastException) {
+        throw $lastException;
+    }
+    throw new NotFoundException('No valid barcodes could be found with those options.');
 }
 
 if ($showId) {
