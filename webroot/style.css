@@ -61,6 +61,19 @@ body {
     margin: 0 0 2rem;
 }
 
+@media print {
+    .main__tip {
+        display: none;
+    }
+}
+
+.print-button {
+    display: block;
+    line-height: 1.5rem;
+    padding: .1rem 1rem;
+    margin: 1rem auto 0;
+}
+
 .hide {
     display: none;
 }
