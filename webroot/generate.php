@@ -103,11 +103,14 @@ $size = $_GET['size'] ?? 'small';
         <h1 class="header__title">Barcodes</h1>
     </header>
     <main class="main" role="main">
+        <p class="main__tip">
+            <strong>Printing Tip:</strong> Be sure to print with the <strong>highest quality</strong> possible for your
+            printer.  The barcode details are quite small so need to be printed at max quality to be scannable.
+            <br>
+            <button onclick="window.print();" class="print-button">Print</button>
+        </p>
         <?php foreach($codes as $details): ?>
             <?php template('repeat-barcode', compact('details', 'size')); ?>
         <?php endforeach; ?>
     </main>
-    <script>
-        window.print();
-    </script>
 </body>
