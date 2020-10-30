@@ -13,7 +13,7 @@ $named = $barcode->allNamed();
     <meta charset="utf-8">
     <title>Barcodes</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" type="text/css" href="style.css">
+    <link rel="stylesheet" type="text/css" href="dist/index.css">
 </head>
 <body>
     <header class="header">
@@ -49,14 +49,14 @@ $named = $barcode->allNamed();
                 <br>
                 <ul class="named-selection">
                     <li class="named-selection__option">
-                        <label class="option-box">
+                        <label class="named-selection__option__label">
                             <input type="checkbox" named-checkbox-all>
                             All
                         </label>
                     </li>
                     <?php foreach($named as $code): ?>
                         <li class="named-selection__option">
-                            <label class="option-box">
+                            <label class="named-selection__option__label">
                                 <input type="checkbox" name="named[]" value="<?= $code['slug'] ?>" named-checkbox>
                                 <?= $code['title'] ?> (<?= $code['id'] ?>)
                             </label>

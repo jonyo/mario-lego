@@ -1,0 +1,15 @@
+.error {
+    border: 2px solid $dark-red;
+    border-radius: .5rem;
+    padding: 1rem;
+    background-color: $light-red;
+
+    &__title {
+        color: $red;
+        margin: 0;
+    }
+
+    &__message {
+        color: $dark-red;
+    }
+}

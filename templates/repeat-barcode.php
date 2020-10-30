@@ -25,12 +25,12 @@ if (empty($size)) {
      * SVG below uses 1 unit = 1mm - if it is scaled differently it will be the wrong size to scan
      */
     ?>
-    <svg class="barcode__pattern" viewBox="0 0 <?= 10 * $size ?> 300" xmlns="http://www.w3.org/2000/svg">
+    <svg class="barcode__svg" viewBox="0 0 <?= 10 * $size ?> 300" xmlns="http://www.w3.org/2000/svg">
         <defs>
             <g stroke-width=".2" id="pattern<?= $details['id'] ?>">
                 <?php foreach ($details['pattern'] as $lineNum => $color): ?>
                     <?php $x = ($lineNum * .4) ?>
-                    <line x1="<?= $x ?>" y1="0" x2="<?= $x ?>" y2="100%" stroke="var(--barcode-<?= $color ?>)" />
+                    <line x1="<?= $x ?>" y1="0" x2="<?= $x ?>" y2="100%" stroke="var(--<?= $color ?>)" />
                 <?php endforeach; ?>
             </g>
         </defs>
