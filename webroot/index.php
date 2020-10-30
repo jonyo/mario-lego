@@ -32,10 +32,12 @@ $named = $barcode->allNamed();
             </label>
             <label>
                 Size:
-                <select name="size">
-                    <option>small</option>
-                    <option>medium</option>
-                    <option value="large">large (full page barcode)</option>
+                <select name="size" size-dropdown>
+                    <option value="1">1cm</option>
+                    <option value="2" selected>2cm</option>
+                    <option value="6">6cm</option>
+                    <option value="12">12cm</option>
+                    <option value="18">18cm (full page)</option>
                 </select>
             </label>
             <input type="submit" value="Generate">
