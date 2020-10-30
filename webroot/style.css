@@ -1,21 +1,20 @@
 :root {
-    /** Do NOT change - for barcodes **/
-    --red: #b22222;
-    --yellow: #fad700;
-    --light-green: #9acd33;
-    --dark-green: #2e8b57;
-    --teal: #26b2aa;
-    --blue: #4169e1;
-    --purple: #9370db;
-    --pink: #da70d6;
+    --barcode-red: #b22222;
+    --barcode-yellow: #fad700;
+    --barcode-light-green: #9acd33;
+    --barcode-dark-green: #2e8b57;
+    --barcode-teal: #26b2aa;
+    --barcode-blue: #4169e1;
+    --barcode-purple: #9370db;
+    --barcode-pink: #da70d6;
 
-    /** Used by main page **/
+    --teal: #26b2aa;
     --dark-teal: #0b3231;
     --light-teal: #a8ede9;
     --transparent-white: rgba(255, 255, 255, .8);
-    --fire: #b1252c;
-    --light-fire: #f4cbcd;
-    --dark-fire: #4c1013;
+    --red: #b1252c;
+    --light-red: #f4cbcd;
+    --dark-red: #4c1013;
 }
 
 /**
@@ -101,19 +100,19 @@ body {
  */
 
 .error {
-    border: 2px solid var(--dark-fire);
+    border: 2px solid var(--dark-red);
     border-radius: .5rem;
     padding: 1rem;
-    background-color: var(--light-fire);
+    background-color: var(--light-red);
 }
 
 .error__title {
-    color: var(--fire);
+    color: var(--red);
     margin: 0;
 }
 
 .error__message {
-    color: var(--dark-fire);
+    color: var(--dark-red);
 }
 
 /**
@@ -164,17 +163,28 @@ body {
     page-break-inside: avoid;
 }
 
-.barcode--small {
+.barcode--1 {
+    width: 1cm;
+    height: 1cm;
+}
+
+.barcode--2 {
     width: 2cm;
     height: 2cm;
 }
 
-.barcode--medium {
+.barcode--6 {
     width: 6cm;
     height: 6cm;
 }
 
-.barcode--large {
+.barcode--12 {
+    width: 12cm;
+    height: 12cm;
+}
+
+.barcode--18 {
+    /* unlike other sizes, this one is filling entire page */
     width: 18cm;
     height: 24cm;
     display: block;
@@ -197,14 +207,28 @@ body {
     margin: 0;
 }
 
+.barcode--1 .barcode__title {
+    /* Note: use px here, as it will not go below 9px using rem */
+    font-size: 5px;
+    padding: .1rem;
+}
+
 .barcode__pattern {
-    width: 20mm;
+    width: 1cm;
 }
 
-.barcode--medium .barcode__pattern {
-    width: 60mm;
+.barcode--2 .barcode__pattern {
+    width: 2cm;
 }
 
-.barcode--large .barcode__pattern {
-    width: 180mm;
+.barcode--6 .barcode__pattern {
+    width: 6cm;
+}
+
+.barcode--12 .barcode__pattern {
+    width: 12cm;
+}
+
+.barcode--18 .barcode__pattern {
+    width: 18cm;
 }

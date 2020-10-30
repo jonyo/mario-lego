@@ -2,6 +2,7 @@
 
 use Jonyo\MarioLego\Exception\BadRequestException;
 use Jonyo\MarioLego\Exception\InvalidIdException;
+use Jonyo\MarioLego\Exception\InvalidSizeException;
 use Jonyo\MarioLego\Exception\NotFoundException;
 use Jonyo\MarioLego\Model\Barcode;
 
@@ -87,7 +88,11 @@ if ($showId) {
     $codes = $barcode->appendIdsToTitles($codes);
 }
 
-$size = $_GET['size'] ?? 'small';
+$size = (int)($_GET['size'] ?? 2);
+$sizes = [1,2,6,12,18];
+if (!in_array($size, $sizes)) {
+    throw new InvalidSizeException('Invalid size ' . $size . 'cm, must be one of ' . implode('cm, ', $sizes) . 'cm.');
+}
 ?>
 <!doctype html>
 <html>
