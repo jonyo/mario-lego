@@ -6,3 +6,6 @@ RUN pecl install xdebug-2.9.6\
 
 # change the web_root to /var/www/html/webroot folder
 RUN sed -i -e "s/html/html\/webroot/g" /etc/apache2/sites-enabled/000-default.conf
+
+# install composer
+RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/bin/ --filename=composer

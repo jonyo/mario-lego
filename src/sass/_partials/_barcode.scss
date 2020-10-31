@@ -1,0 +1,63 @@
+.barcode {
+    display: inline-block;
+    border: 1px solid black;
+    border-radius: .5rem;
+    position: relative;
+    margin: .5rem .5rem 0 0;
+    overflow: hidden;
+    page-break-inside: avoid;
+
+    &__title {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: auto;
+        border: 1px solid black;
+        border-bottom: none;
+        border-radius: .5rem;
+        font-family: Futura;
+        font-size: .5rem;
+        background-color: $transparent-white;
+        padding: .2rem .3rem;
+        margin: 0;
+    }
+
+    &__svg {
+        width: 100%;
+    }
+
+    &--1 {
+        width: 1cm;
+        height: 1cm;
+
+        .barcode__title {
+            // Note: use px here, as font size will not go below 9px using rem
+            font-size: 5px;
+            padding: .1rem;
+        }
+    }
+
+    &--2 {
+        width: 2cm;
+        height: 2cm;
+    }
+
+    &--6 {
+        width: 6cm;
+        height: 6cm;
+    }
+
+    &--12 {
+        width: 12cm;
+        height: 12cm;
+    }
+
+    &--18 {
+        // unlike other sizes, this one is filling the entire page so make it print cleanly 1 per page
+        width: 18cm;
+        height: 24cm;
+        display: block;
+        margin: .5rem auto;
+        page-break-after: always;
+    }
+}
