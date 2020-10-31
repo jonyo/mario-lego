@@ -23,7 +23,7 @@ There are a few options here.  This assumes a little knowledge in setting up you
 
 1.  On the remote server, clone this repo.
 1.  In the project's folder, run `composer install`
-1.  Point the document root to the `webroot` in this project.  Or if part of a larger project, you could add this repo somewhere (outside the web root) and create a sym link into the `webroot` folder.  However you do it, make sure only the files in `webroot` are exposed, not any of the files in the base folder.
+1.  Point the document root to the `webroot` in this project.  Or if part of a larger website, you could add this repo somewhere (outside the web root) and create a sym link into the `webroot` folder.  However you do it, make sure only the files in `webroot` are exposed, not any of the files in the base folder.
 
 # Usage
 
