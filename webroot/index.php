@@ -17,6 +17,7 @@ $named = $barcode->allNamed();
 </head>
 <body>
     <header class="header">
+        <?= template('layout/fork-me') ?>
         <h1 class="header__title">Barcode Generator</h1>
     </header>
     <main class="main" role="main">
