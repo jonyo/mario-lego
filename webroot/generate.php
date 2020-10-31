@@ -104,6 +104,7 @@ if (!in_array($size, $sizes)) {
 </head>
 <body>
     <header class="header">
+        <?= template('layout/fork-me') ?>
         <a href="index.php" class="header__back">< Back</a>
         <h1 class="header__title">Barcodes</h1>
     </header>
