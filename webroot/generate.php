@@ -2,6 +2,7 @@
 
 use Jonyo\MarioLego\Exception\BadRequestException;
 use Jonyo\MarioLego\Exception\InvalidIdException;
+use Jonyo\MarioLego\Exception\InvalidQuantityException;
 use Jonyo\MarioLego\Exception\InvalidSizeException;
 use Jonyo\MarioLego\Exception\NotFoundException;
 use Jonyo\MarioLego\Model\Barcode;
@@ -93,6 +94,11 @@ $sizes = [1,2,6,12,18];
 if (!in_array($size, $sizes)) {
     throw new InvalidSizeException('Invalid size ' . $size . 'cm, must be one of ' . implode('cm, ', $sizes) . 'cm.');
 }
+
+$quantity = (int)($_GET['quantity'] ?? 0);
+if ($quantity < 1 || $quantity > 99) {
+    throw new InvalidQuantityException();
+}
 ?>
 <!doctype html>
 <html>
@@ -116,7 +122,9 @@ if (!in_array($size, $sizes)) {
             <button onclick="window.print();" class="print-button">Print</button>
         </p>
         <?php foreach($codes as $details): ?>
-            <?php template('repeat-barcode', compact('details', 'size')); ?>
+            <?php for ($i = 0; $i < $quantity; $i++): ?>
+                <?php template('repeat-barcode', compact('details', 'size')); ?>
+            <?php endfor; ?>
         <?php endforeach; ?>
     </main>
 </body>
