@@ -19,6 +19,7 @@ if ($exception instanceof HttpException) {
 </head>
 <body>
     <header class="header">
+        <?= template('layout/fork-me') ?>
         <a href="index.php" class="header__back">< Back</a>
         <h1 class="header__title">OOPS!</h1>
     </header>
