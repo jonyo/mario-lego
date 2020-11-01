@@ -1,0 +1,69 @@
+.settings {
+    border: 2px solid $teal;
+    border-radius: .5rem;
+    padding: .5rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+    flex-wrap: wrap;
+}
+
+.setting {
+    border: 1px solid $light-gray;
+    border-radius: .1rem;
+    padding: .2rem .4rem;
+    line-height: 1.5rem;
+    margin: .1rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+
+    @media screen and (min-width: 768px) {
+        width: auto;
+        display: inline-flex;
+    }
+
+    &__dropdown {
+        padding: .5rem;
+        min-width: 10.625rem;
+
+        @media screen and (min-width: 768px) {
+            min-width: auto;
+            margin-left: 2rem;
+        }
+    }
+
+    &__input {
+        padding: .5rem;
+        min-width: 10.625rem;
+
+        @media screen and (min-width: 768px) {
+            min-width: auto;
+            margin-left: 2rem;
+        }
+    }
+
+    &__checkbox {
+        margin: .5rem 1.2rem .5rem .2rem;
+    }
+
+    &__button {
+        width: 100%;
+
+        @media screen and (min-width: 768px) {
+            width: auto;
+        }
+    }
+}
+
+
+.type-section {
+    border: 2px solid $teal;
+    border-radius: .5rem;
+    margin-top: 1rem;
+
+    &__legend {
+        color: $dark-teal;
+    }
+}
