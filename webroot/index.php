@@ -22,30 +22,36 @@ $named = $barcode->allNamed();
     </header>
     <main class="main" role="main">
         <form action="generate.php">
-            <label>
-                Type:
-                <select name="type" generator-type>
-                    <option value="named">Choose Item(s)</option>
-                    <option value="all-named">All Working</option>
-                    <option value="id">Enter ID(s)</option>
-                    <option value="id-range">Enter ID Range</option>
-                </select>
-            </label>
-            <label>
-                Size:
-                <select name="size" size-dropdown>
-                    <option value="1">1cm</option>
-                    <option value="2" selected>2cm</option>
-                    <option value="6">6cm</option>
-                    <option value="12">12cm</option>
-                    <option value="18">18cm (full page)</option>
-                </select>
-            </label>
-            <input type="submit" value="Generate">
+            <section class="settings">
+                <label class="setting">
+                    Which Ones
+                    <select name="type" class="setting__dropdown" generator-type>
+                        <option value="named">Choose Item(s) Below</option>
+                        <option value="all-named">All Working</option>
+                        <option value="id">Enter ID(s)</option>
+                        <option value="id-range">Enter ID Range</option>
+                    </select>
+                </label>
+                <label class="setting">
+                    Size
+                    <select name="size" class="setting__dropdown" size-dropdown>
+                        <option value="1">1cm</option>
+                        <option value="2" selected>2cm</option>
+                        <option value="6">6cm</option>
+                        <option value="12">12cm</option>
+                        <option value="18">18cm (full page)</option>
+                    </select>
+                </label>
+                <label class="setting">
+                    Quantity
+                    <input type="number" name="quantity" value="1" class="setting__input" min="1" max="99">
+                </label>
+                <input type="submit" class="setting__button" value="Generate">
+            </section>
             <fieldset generator-type-section data-type="named" class="type-section hide">
-                <legend>Choose Item(s)</legend>
-                <label>
-                    <input type="checkbox" name="showId" value="1"> Show ID in barcode labels
+                <legend class="type-section__legend">Choose Item(s)</legend>
+                <label class="setting">
+                    <input type="checkbox" name="showId" value="1" class="setting__checkbox"> Show ID in barcode labels
                 </label>
                 <br>
                 <ul class="named-selection">
@@ -67,12 +73,12 @@ $named = $barcode->allNamed();
             </fieldset>
             <fieldset generator-type-section data-type="all-named" class="type-section hide">
                 <legend>All Working</legend>
-                <label>
-                    <input type="checkbox" name="showId" value="1"> Show ID in barcode labels
+                <label class="setting">
+                    <input type="checkbox" name="showId" value="1" class="setting__checkbox"> Show ID in barcode labels
                 </label>
             </fieldset>
             <fieldset generator-type-section data-type="id" class="type-section hide">
-                <legend>Enter ID(s)</legend>
+                <legend class="type-section__legend">Enter ID(s)</legend>
                 <p class="tip">
                     Enter the ID(s).  If more than one, seperate the number by spaces.
                     <strong>Valid IDs are 1 to 210.</strong>
@@ -85,7 +91,7 @@ $named = $barcode->allNamed();
                 </label>
             </fieldset>
             <fieldset generator-type-section data-type="id-range" class="type-section hide">
-                <legend>Enter ID Range</legend>
+                <legend class="type-section__legend">Enter ID Range</legend>
                 <p class="tip">
                     Note that some ID's won't work, it will automatically skip them.  Also note that not all Barcodes
                     will do something.  This option is mainly to experiment to find new working barcodes.
