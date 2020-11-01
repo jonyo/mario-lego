@@ -46,7 +46,7 @@ $named = $barcode->allNamed();
                     Quantity
                     <input type="number" name="quantity" value="1" class="setting__input" min="1" max="99">
                 </label>
-                <input type="submit" class="setting__button" value="Generate">
+                <input type="submit" class="button setting__button" value="Generate">
             </section>
             <fieldset generator-type-section data-type="named" class="type-section hide">
                 <legend class="type-section__legend">Choose Item(s)</legend>

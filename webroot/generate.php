@@ -119,7 +119,7 @@ if ($quantity < 1 || $quantity > 99) {
             <strong>Printing Tip:</strong> Be sure to print with the <strong>highest quality</strong> possible for your
             printer.  The barcode details are quite small so need to be printed at max quality to be scannable.
             <br>
-            <button onclick="window.print();" class="print-button">Print</button>
+            <button onclick="window.print();" class="button button--print">Print</button>
         </p>
         <?php foreach($codes as $details): ?>
             <?php for ($i = 0; $i < $quantity; $i++): ?>
