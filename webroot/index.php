@@ -72,7 +72,7 @@ $named = $barcode->allNamed();
                 </ul>
             </fieldset>
             <fieldset generator-type-section data-type="all-named" class="type-section hide">
-                <legend>All Working</legend>
+                <legend class="type-section__legend">All Working</legend>
                 <label class="setting">
                     <input type="checkbox" name="showId" value="1" class="setting__checkbox"> Show ID in barcode labels
                 </label>
