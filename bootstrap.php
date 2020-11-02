@@ -1,5 +1,7 @@
 <?php declare(strict_types = 1);
 
+use Jonyo\MarioLego\Model\Template;
+
 /**
  * Note: this is a very basic app so this just sets up a very basic framework
  */
@@ -13,8 +15,7 @@ require 'vendor/autoload.php';
  */
 function template(string $name, array $vars = []): void
 {
-    extract($vars);
-    include BASE_DIR . "templates/$name.php";
+    echo Template::getTemplate($name, $vars)->output();
 }
 
 /**

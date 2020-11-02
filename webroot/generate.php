@@ -9,6 +9,8 @@ use Jonyo\MarioLego\Model\Barcode;
 
 require '../bootstrap.php';
 
+$startTime = microtime(true);
+
 $barcode = new Barcode();
 
 $codes = [];
@@ -126,5 +128,6 @@ if ($quantity < 1 || $quantity > 99) {
                 <?php template('repeat-barcode', compact('details', 'size')); ?>
             <?php endfor; ?>
         <?php endforeach; ?>
+        <?php template('stats', compact('startTime')); ?>
     </main>
 </body>
